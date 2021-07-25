@@ -1,0 +1,21 @@
+def creationUser():
+
+    prenomUser = input("Votre prenom : ")
+    nomUser = input("Votre nom : ")
+    login = prenomUser[0] + nomUser
+    motPass = input("mdp: ")
+    motPass = sha512(motPass.encode()).hexdigest()
+    mydb = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='ESGI@2021',
+        port="3306",
+        database='total')
+
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO utilisateurs (username, password) VALUES (%s, %s)"
+    val = (login,motPass)
+    mycursor.execute(sql,val)
+    mydb.commit()
+
+    print(mycursor.rowcount, "Nouvelle création d'utilisateur réussi avec le nom d'utilisateur :.",login)
