@@ -1,0 +1,14 @@
+def suppRep():
+    suprRep = input("Veuillez saisir le nom du dossier à supprimer : ")
+    suprRep = session.rmd(suprRep)
+    print("Le répertoire a été supprimé avec succès.\n")
+
+    print("Voulez-vous supprimé un autre dossier ?")
+    ajout = input("\n1. Oui supprimé un autre dossier \n2. Non retour au menu principal \nSaisissez votre réponse :")
+    if ajout == "1":
+        suppRep()
+    elif ajout == "2":
+        menuPrincipal()
+    else:
+        print("Erreur, veuillez recommencer")
+        menuFTP()
