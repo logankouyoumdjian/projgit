@@ -1,0 +1,16 @@
+login = input("Veuillez saisir le login de l'utilisateur a supprimé : ")
+
+    mydb = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='ESGI@2021',
+        port="3306",
+        database='total')
+
+    mycursor = mydb.cursor()
+    sql = "DELETE FROM utilisateurs WHERE username = %s"
+    val = (login,)
+    mycursor.execute(sql, val)
+    mydb.commit()
+
+    print(mycursor.rowcount, "L'utilisateur ",login, " a bien été supprimé.")
