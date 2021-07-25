@@ -1,0 +1,20 @@
+oldNom = input("Veuillez saisir votre nom d'utilisateur : ")
+    newNom = input("Veuillez saisir le NOUVEAU nom d'utilisateur : ")
+
+    mydb = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='ESGI@2021',
+        port="3306",
+        database='total')
+
+    mycursor = mydb.cursor()
+    sql = "UPDATE utilisateurs SET username = %s WHERE username = %s"
+    val = (newNom,oldNom)
+    mycursor.execute(sql,val)
+    mydb.commit()
+
+    if mycursor.rowcount < 1:
+        print("Nom d'utilisateur incorrect. Veuillez saisir à nouveau.")
+    elif mycursor.rowcount > 0:
+        print("Votre nom d'utilisateur a bien été mis à jour et est désormais :", newNom)
